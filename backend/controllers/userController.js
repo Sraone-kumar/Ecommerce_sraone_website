@@ -77,7 +77,7 @@ const loginUser = async (req, res, next) => {
 
       let cookieParams = {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
+        secure: process.env.NODE_ENV === "development",
         sameSite: "strict",
       };
 
