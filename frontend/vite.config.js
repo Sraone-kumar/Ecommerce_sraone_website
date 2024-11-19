@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://ecommerce-sraone-website.onrender.com",
+        target: "https://ecommerce-sraone-website.onrender.com/",
         changeOrigin: true,
       },
     },
