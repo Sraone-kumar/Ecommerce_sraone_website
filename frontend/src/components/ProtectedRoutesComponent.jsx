@@ -11,7 +11,10 @@ export default function ProtectedRoutesComponent({ admin }) {
     const fetchData = async () => {
       await axios("api/get-token", {
         method: "GET",
-        baseURL: "http://localhost:5173",
+        baseURL:
+          import.meta.env.VITE_APP_MODE === "development_local"
+            ? "http://localhost:5173"
+            : "https://dealsdotcom.netlify.app",
       })
         .then((res) => {
           setIsAuth(res.data.token);
