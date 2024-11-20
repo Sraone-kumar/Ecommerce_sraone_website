@@ -16,6 +16,7 @@ app.get("/get-token", (req, res) => {
   console.log("/get-token");
   try {
     const accessToken = req.cookies["access_token"];
+    // console.log(`access_token: ${accessToken}`);
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     return res.json({ token: decoded.name, isAdmin: decoded.isAdmin });
   } catch (error) {

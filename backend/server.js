@@ -2,16 +2,28 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 
 const app = express();
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const apiRoutes = require("./routes/apiRoutes");
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(fileUpload());
+const allowedOrigins = [
+  process.env.NODE_CLIENT ? process.env.NODE_CLIENT : `http://localhost:5174`,
+];
+// console.log(allowedOrigins);
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 
 app.get("/", async (req, res, next) => {
   res.json({ message: "API running..." });

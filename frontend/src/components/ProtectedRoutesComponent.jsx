@@ -2,20 +2,15 @@ import { Outlet, Navigate, useNavigate } from "react-router-dom";
 import UserChatComponent from "./user/UserChatComponent";
 import { useEffect, useState } from "react";
 import LoginPage from "../Pages/LoginPage";
-import axios from "axios";
+import api from "../axiosbase";
 
 export default function ProtectedRoutesComponent({ admin }) {
   const [isAuth, setIsAuth] = useState();
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
-      await axios("api/get-token", {
-        method: "GET",
-        baseURL:
-          import.meta.env.VITE_APP_MODE === "development_local"
-            ? "http://localhost:5173"
-            : "https://dealsdotcom.netlify.app",
-      })
+      await api
+        .get("api/get-token")
         .then((res) => {
           setIsAuth(res.data.token);
 

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import api from "../axiosbase";
 
 const userInfoFromLocalStorage = localStorage.getItem("userInfo")
   ? JSON.parse(localStorage.getItem("userInfo"))
@@ -22,7 +22,7 @@ export const userSlice = createSlice({
       localStorage.removeItem("userInfo");
       localStorage.removeItem("cart");
       sessionStorage.removeItem("userInfo");
-      axios.get("/api/logout");
+      api.get("/api/logout");
       state = {};
       document.location.href = "/login";
     },
