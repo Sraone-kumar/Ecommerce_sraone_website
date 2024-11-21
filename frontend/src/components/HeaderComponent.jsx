@@ -116,6 +116,8 @@ function DropDownUser() {
 }
 
 export default function HeaderComponent() {
+  const { userInfo } = useSelector((state) => state.user);
+
   return (
     <div className="text-white text-sm px-2 justify-evenly items-center flex h-[50px] bg-slate-800">
       <NavLink to={"/"} className={"font-semibold"}>
@@ -147,17 +149,25 @@ export default function HeaderComponent() {
       </div>
 
       <div className="flex items-center justify-center gap-3">
+        {userInfo.isAdmin ? (
+          <NavLink to={"/admin/orders"} className={"relative"}>
+            Admin
+            <div className="absolute top-0 right-0 rounded size-2 bg-red-500"></div>
+          </NavLink>
+        ) : userInfo.name && !userInfo.isAdmin ? (
+          <DropDownUser />
+        ) : (
+          <>
+            <NavLink to={"/login"} className={"relative"}>
+              Login
+            </NavLink>
+            <NavLink to={"/register"} className={"relative"}>
+              Register
+            </NavLink>
+          </>
+        )}
         {/* <div>Login</div> */}
-        <NavLink to={"/admin/orders"} className={"relative"}>
-          Admin
-          <div className="absolute top-0 right-0 rounded size-2 bg-red-500"></div>
-        </NavLink>
-        <NavLink to={"/login"} className={"relative"}>
-          Login
-        </NavLink>
-        <NavLink to={"/register"} className={"relative"}>
-          Register
-        </NavLink>
+
         <NavLink to={"/cart"} className="flex items-center justify-center">
           <div className="flex rounded-full text-xs size-4 items-center justify-center bg-red-500 ">
             1
@@ -179,7 +189,6 @@ export default function HeaderComponent() {
 
           <span>Cart</span>
         </NavLink>
-        <DropDownUser />
       </div>
     </div>
   );
