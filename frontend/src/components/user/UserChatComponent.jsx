@@ -35,7 +35,7 @@ function ChatBox({ isClicked, setIsClicked }) {
   return (
     <div
       className={`${
-        isClicked ? "opacity-0 " : ""
+        isClicked ? "hidden " : ""
       }flex flex-col fixed shadow bg-white right-5 bottom-24 w-[250px] h-[300px] transition-all`}
     >
       <div className="min-h-8 bg-slate-900 flex items-center justify-center px-2 text-xs text-white">
