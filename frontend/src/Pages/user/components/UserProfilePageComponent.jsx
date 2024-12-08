@@ -46,19 +46,19 @@ export default function UserProfilePageComponent({
       e.currentTarget.checkValidity() === true &&
       pass === form.repassword.value
     ) {
-      console.log(
-        name,
-        lastname,
-        email,
-        phonenumber,
-        address,
-        country,
-        postalcode,
-        city,
-        state,
-        pass,
-        e.currentTarget.repassword.value
-      );
+      // console.log(
+      //   name,
+      //   lastname,
+      //   email,
+      //   phonenumber,
+      //   address,
+      //   country,
+      //   postalcode,
+      //   city,
+      //   state,
+      //   pass,
+      //   e.currentTarget.repassword.value
+      // );
 
       updateUserApiRequest(
         name,

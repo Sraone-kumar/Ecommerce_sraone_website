@@ -120,7 +120,7 @@ function Pagination({ pagination, getProducts }) {
   }, [pagination]);
 
   useEffect(() => {
-    console.log(`currentPage:${currentPage}`);
+    // console.log(`currentPage:${currentPage}`);
   }, [currentPage]);
   return (
     <div className="flex gap-2">

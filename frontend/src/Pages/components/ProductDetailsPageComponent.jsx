@@ -11,7 +11,8 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { addToCart } from "../../Redux/cartSlice";
-
+import api from "../../axiosbase";
+import { NavLink } from "react-router-dom";
 export default function ProductDetailsPageComponent({
   fetchProduct,
   dispatch,
@@ -19,13 +20,13 @@ export default function ProductDetailsPageComponent({
 }) {
   const [quantity, setQuantity] = useState({});
   const [product, setProduct] = useState({});
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
   useEffect(() => {
     fetchProduct().then((data) => setProduct(data));
   }, []);
 
-  useEffect(() => {
-    console.log(`quantity: ${quantity}`);
-  }, [quantity]);
+  useEffect(() => {}, [quantity]);
 
   return (
     <div className="w-full  p-5 min-h-screen gap-5 flex flex-col">
@@ -81,26 +82,47 @@ export default function ProductDetailsPageComponent({
         >
           <span>status: in stock</span>
           <span className="">
-            Price:<b>$100</b>
+            Price:<b>{`$${product.price}`}</b>
           </span>
           <div className="flex flex-col gap-2">
             <span>quantity:</span>
             <DropDownBox
               setQuantity={setQuantity}
               optionsListData={Array.from(Array(product.count), (e, i) => {
-                return { id: i + 1, value: i + 1 };
+                return { id: i + 1, value: `${i + 1}` };
               })}
               width={"100px"}
             />
           </div>
           <button
-            onClick={() =>
-              dispatch(addToCart({ productId, quantity: quantity.value }))
-            }
+            onClick={() => {
+              api.get(`/api/products/get-one/${productId}`).then((res) => {
+                const data = res.data;
+                dispatch(
+                  addToCart({
+                    productID: data._id,
+                    quantity: Number(quantity.value),
+                    image: data.images[0] ?? null,
+                    price: data.price,
+                    count: data.count,
+                  })
+                );
+              });
+
+              setIsAddedToCart(true);
+            }}
             className="w-fit hover:bg-slate-900/75 bg-slate-900 text-white flex items-center justify-center p-2 rounded-sm shadow"
           >
             Add to cart
           </button>
+          {isAddedToCart && (
+            <>
+              <span className="text-green-500">Item added to cart! </span>
+              <NavLink className={"text-blue-500"} to={"/cart"}>
+                go to cart
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
       <div

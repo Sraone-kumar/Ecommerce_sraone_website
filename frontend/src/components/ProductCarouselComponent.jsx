@@ -63,9 +63,7 @@ export default function ProductCarouselComponent() {
         className="flex text-3xl font-bold relative items-end pb-32 text-white justify-center w-full h-full  bg-center bg-cover  duration-500"
       >
         <div className="absolute -z-0 top-0 left-0 w-full h-full flex items-center justify-center bg-slate-900/65">
-          <span className="text-slate-200">
-            Best Seller in Consoles category
-          </span>
+          <span className="text-slate-200 mt-32">Best Sellers</span>
         </div>
       </div>
     </div>

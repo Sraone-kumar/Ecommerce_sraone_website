@@ -25,29 +25,11 @@ export default function ProtectedRoutesComponent({ admin }) {
     fetchData();
   }, [navigate]);
 
-  // return isAuth && admin && isAuth !== "admin" ? (
-  //   <Navigate to={"/login"} />
-  // ) : isAuth && admin ? (
-  //   <Outlet />
-  // ) : isAuth && !admin ? (
-  //   <>
-  //     <UserChatComponent /> <Outlet />
-  //   </>
-  // ) : (
-  //   <Navigate to={"/login"} />
-  // );
-
   if (isAuth && admin && isAuth !== "admin") {
-    console.log(1);
-    console.log(isAuth);
     return <Navigate to={"/login"} />;
   } else if (isAuth && admin) {
-    console.log(2);
-    console.log(isAuth);
     return <Outlet />;
   } else if (isAuth && !admin) {
-    console.log(3);
-    console.log(isAuth);
     return (
       <>
         <Outlet />
@@ -55,8 +37,6 @@ export default function ProtectedRoutesComponent({ admin }) {
       </>
     );
   } else {
-    console.log(4);
-    console.log(isAuth);
     <Navigate to={"/login"} />;
   }
 }

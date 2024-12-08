@@ -8,7 +8,7 @@ export default function ProductDetailsPage() {
   const dispatch = useDispatch();
   const fetchProduct = async () => {
     const { data } = await api.get(`/api/products/get-one/${id}`);
-    console.log("data:", data);
+    // console.log("data:", data);
     return data;
   };
   return (

@@ -117,7 +117,7 @@ function DropDownUser() {
 
 export default function HeaderComponent() {
   const { userInfo } = useSelector((state) => state.user);
-  const { products } = useSelector((state) => state.cart);
+  const { itemsCount } = useSelector((state) => state.cart);
 
   return (
     <div className="text-white text-sm px-2 justify-evenly items-center flex h-[50px] bg-slate-800">
@@ -172,7 +172,7 @@ export default function HeaderComponent() {
         <NavLink to={"/cart"} className="flex items-center justify-center">
           <div className="flex rounded-full text-xs size-4 items-center justify-center bg-red-500 ">
             {/* 1 */}
-            {products.length}
+            {itemsCount}
           </div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
