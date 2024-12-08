@@ -57,8 +57,8 @@ const saveAttr = async (req, res, next) => {
     const categoryExists = await Category.findOne({ name: category }).orFail();
     if (categoryExists.attrs.length > 0) {
       //if key exists in the database then add a value to the key
-      const isKey = true;
-      categoryExists.map((item, index) => {
+      let isKey = true;
+      categoryExists.attrs.map((item, index) => {
         if (item.key == key) {
           isKey = false;
           const copyAttrVals = [...categoryExists.attrs[index].value];

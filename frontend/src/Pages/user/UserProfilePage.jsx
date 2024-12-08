@@ -32,7 +32,7 @@ const updateUserApiRequest = async (
 
 const fetchUser = async (user_id) => {
   const { data } = await api.get("/api/users/profile/" + user_id);
-  console.log(data);
+  // console.log(data);
   return data;
 };
 

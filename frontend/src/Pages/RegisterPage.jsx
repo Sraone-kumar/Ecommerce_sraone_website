@@ -15,7 +15,7 @@ export default function RegisterPage() {
       email,
       password,
     });
-    console.log(data);
+    // console.log(data);
     sessionStorage.setItem("userInfo", JSON.stringify(data.userCreated));
     if (data.success === "User created") {
       navigate("/user/profile");

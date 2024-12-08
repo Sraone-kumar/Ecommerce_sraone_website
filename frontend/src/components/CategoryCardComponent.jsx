@@ -7,12 +7,12 @@ export default function CategoryCardComponent({ data }) {
       <div className="flex h-[60%] bg-green-300">
         <img
           className="w-full h-full object-cover"
-          src="https://5.imimg.com/data5/ANDROID/Default/2021/12/NU/YX/YA/24401847/product-jpeg-500x500.jpg"
-          alt=""
+          src={data.image}
+          alt={data.name}
         />
       </div>
       <div className="flex p-2 gap-2 text-sm flex-col">
-        <span className="font-bold text-lg">{data}</span>
+        <span className="font-bold text-lg">{data.name}</span>
         <span>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet vero
           corporis doloremque accusamus,
