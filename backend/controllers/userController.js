@@ -82,7 +82,10 @@ const loginUser = async (req, res, next) => {
       };
 
       if (keepMeSignedIn) {
-        cookieParams = { ...cookieParams, maxAge: 1000 * 60 * 60 * 24 * 7 };
+        cookieParams = {
+          ...cookieParams,
+          maxAge: 1000 * 1000 * 60 * 60 * 24 * 7,
+        };
       }
 
       return res

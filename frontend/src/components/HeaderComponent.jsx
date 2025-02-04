@@ -120,7 +120,7 @@ export default function HeaderComponent() {
   const { itemsCount } = useSelector((state) => state.cart);
 
   return (
-    <div className="text-white text-sm px-2 justify-evenly items-center flex h-[50px] bg-slate-800">
+    <div className="text-white  text-sm px-2 justify-evenly items-center flex h-[50px] bg-slate-800">
       <NavLink to={"/"} className={"font-semibold"}>
         DealsDotCom
       </NavLink>
@@ -170,10 +170,12 @@ export default function HeaderComponent() {
         {/* <div>Login</div> */}
 
         <NavLink to={"/cart"} className="flex items-center justify-center">
-          <div className="flex rounded-full text-xs size-4 items-center justify-center bg-red-500 ">
-            {/* 1 */}
-            {itemsCount}
-          </div>
+          {itemsCount !== 0 && (
+            <div className="flex rounded-full text-xs size-4 items-center justify-center bg-red-500 ">
+              {/* 1 */}
+              {itemsCount}
+            </div>
+          )}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"

@@ -100,6 +100,7 @@ export default function ProductDetailsPageComponent({
                 const data = res.data;
                 dispatch(
                   addToCart({
+                    name: data.name,
                     productID: data._id,
                     quantity: Number(quantity.value),
                     image: data.images[0] ?? null,

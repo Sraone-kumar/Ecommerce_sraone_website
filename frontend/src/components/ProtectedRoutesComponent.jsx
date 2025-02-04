@@ -3,8 +3,11 @@ import UserChatComponent from "./user/UserChatComponent";
 import { useEffect, useState } from "react";
 import LoginPage from "../Pages/LoginPage";
 import api from "../axiosbase";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../Redux/userSlice";
 
 export default function ProtectedRoutesComponent({ admin }) {
+  const dispatch = useDispatch();
   const [isAuth, setIsAuth] = useState();
   const navigate = useNavigate();
   useEffect(() => {
@@ -18,6 +21,7 @@ export default function ProtectedRoutesComponent({ admin }) {
         })
         .catch((error) => {
           console.log(error);
+          dispatch(userLogout());
           navigate("/login");
         });
     };

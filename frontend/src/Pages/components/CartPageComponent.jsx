@@ -9,16 +9,27 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export default function CartPageComponent({
   addToCart,
+  removeFromCart,
   cartItems,
   cartSubtotal,
   reduxDispatch,
 }) {
+  const navigate = useNavigate();
   const changeQuantity = (productID, quantity) => {
     reduxDispatch(addToCart({ productID, quantity }));
+  };
+
+  const removeFromCartHandler = (productID, quantity, price) => {
+    if (window.confirm("are you sure?")) {
+      // console.log(productID);
+      // console.log(quantity);
+      // console.log(price);
+      reduxDispatch(removeFromCart({ productID, quantity, price }));
+    }
   };
 
   return cartItems && cartItems.length > 0 ? (
@@ -37,12 +48,13 @@ export default function CartPageComponent({
         {/* <CartItemComponent />
         <CartItemComponent /> */}
 
-        {cartItems.map((item, idx) => {
+        {cartItems.map((item, _) => {
           return (
             <CartItemComponent
               key={item.productID}
               item={item}
               changeQuantity={changeQuantity}
+              removeFromCartHandler={removeFromCartHandler}
             />
           );
         })}
@@ -55,7 +67,11 @@ export default function CartPageComponent({
           <span className="font-bold">Subtotal:</span>
           <span>{`$${cartSubtotal}`}</span>
         </div>
-        <button className="p-2 w-fit hover:bg-slate-900/90 self-end bg-slate-900 rounded-sm shadow flex items-center justify-center text-white">
+
+        <button
+          onClick={() => navigate("/user/cart-details")}
+          className="p-2 w-fit hover:bg-slate-900/90 self-end bg-slate-900 rounded-sm shadow flex items-center justify-center text-white"
+        >
           checkout
         </button>
       </div>
@@ -65,7 +81,12 @@ export default function CartPageComponent({
   );
 }
 
-function CartItemComponent({ item, orderCreated = false, changeQuantity }) {
+function CartItemComponent({
+  item,
+  removeFromCartHandler,
+  orderCreated = false,
+  changeQuantity,
+}) {
   //   console.log(item);
   return (
     <div
@@ -102,7 +123,12 @@ function CartItemComponent({ item, orderCreated = false, changeQuantity }) {
       </div>
       <div className="min-w-[100px] flex gap-2 items-center justify-center">
         <span className="font-bold">{`${item.quantity * item.price}`}</span>
-        <div className="p-1 cursor-pointer hover:bg-slate-900/90 rounded-full bg-slate-900">
+        <div
+          onClick={() =>
+            removeFromCartHandler(item.productID, item.quantity, item.price)
+          }
+          className="p-1 cursor-pointer hover:bg-slate-900/90 rounded-full bg-slate-900"
+        >
           <XMarkIcon className="size-3 fill-white" />
         </div>
       </div>
@@ -120,7 +146,7 @@ function DropDownBox({
   let optionsList = [];
 
   if (itemCount) {
-    optionsList = Array.from(Array(itemCount), (e, i) => {
+    optionsList = Array.from(Array(itemCount), (_e, i) => {
       return { id: i + 1, value: `${i + 1}` };
     });
   } else {
